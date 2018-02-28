@@ -1,4 +1,4 @@
-KMOD    =  hello
-SRCS    =  hello_freebsd.c
+KMOD    =  htm
+SRCS    =  htm.c
 
 .include <bsd.kmod.mk>
