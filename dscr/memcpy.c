@@ -16,6 +16,8 @@ int main(int argc, char *argv[]){
 
 	printf("dscr = %lx\n", dscr);
 
+	 __asm __volatile ("mtspr 0x11, %0" : "=r"(dscr));
+
 	a = malloc(MAX);
 	b = malloc(MAX);
 
