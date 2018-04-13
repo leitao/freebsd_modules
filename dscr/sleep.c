@@ -12,7 +12,7 @@ int main(){
         asm ("li  9, 5  \n\t");
         asm ("mtdscr 9  \n\t");
 
-	sleep(3);
+	sleep(5);
 	foo = 0;
         asm ("mfdscr %0  \n\t" :  "=r" (foo) ::);
         printf("now dscr is %lx\n", foo);
