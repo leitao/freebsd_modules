@@ -20,15 +20,41 @@ void dump2(void);
 
 
 void dump(){
-	struct slbtnode *slb;
+	struct slbtnode *slbtn;
 	struct pmap *p;
+	struct pvo_tree *pvo;
+	//struct pvo_entry *pve;
+	int indx;
 
 	p = kernel_pmap;
 
+	slbtn = p->pm_slb_tree_root;
+	pvo = &p->pmap_pvo;
 
-	slb = p->pm_slb_tree_root;
+	printf("Kernel_pmap: %p\n", p);
+	printf("Kernel_pmap->pm_slb_tree_root:  %p\n", slbtn);
+	printf("Kernel_pmap->pm_slb_len:  %d\n", p->pm_slb_len);
+	printf("Kernel_pmap->pmap_pvo:  %p\n", pvo);
 
-	printf("Kernel_pmap is at %p\n", slb);
+	printf("virtual_avail: %lx \n", (long) virtual_avail);
+	printf("virtual_end:  %lx \n", (long) virtual_end);
+
+	for (indx = 0; phys_avail[indx + 1] != 0; indx += 2) {                                             
+                vm_paddr_t size1 = phys_avail[indx + 1] - phys_avail[indx];
+
+		printf("0x%016jx - 0x%016jx, %ju bytes (%ju pages)\n",
+                            (uintmax_t)phys_avail[indx],
+                            (uintmax_t)phys_avail[indx + 1] - 1,
+                            (uintmax_t)size1, (uintmax_t)size1 / PAGE_SIZE);
+	}
+
+
+/*
+	do {
+		pve = RB_NEXT(pvo, &kernel_pmap->pmap_pvo, pvo)
+	} while (pve != NULL);
+*/
+
 }
 
 
